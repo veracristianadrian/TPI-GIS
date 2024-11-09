@@ -34,8 +34,8 @@
     <div id="panel">
         <h3>Capas</h3>
         <input type="checkbox" id="check_layer_1"><label for="check_layer_1"> Red Vial</label><br />
-        <input type="checkbox" id="check_layer_2"><label for="check_layer_2">Vegetacion Cultivos</label><br />
-        <input type="checkbox" id="check_layer_3"><label for="check_layer_3">Vegetacion Arborea</label><br />
+        <input type="checkbox" id="check_layer_2"><label for="check_layer_2">Red Ferroviaria</label><br />
+        <input type="checkbox" id="check_layer_3"><label for="check_layer_3">Vegetacion Hidrofila</label><br />
     </div>
 
     <script type="text/javascript">
@@ -50,23 +50,23 @@
                 }
             })
         });
-        var veg_culti = new ol.layer.Image({
-            title: "Vegetacion Cultivos",
+        var red_ferr = new ol.layer.Image({
+            title: "Red Ferroviaria",
             visible: false,
             source: new ol.source.ImageWMS({
                 url: URL_OGC,
                 params: {
-                    LAYERS: 'veg_cultivos'
+                    LAYERS: 'red_ferroviaria'
                 }
             })
         });
-        var veg_arbo = new ol.layer.Image({
-            title: "Vegetacion Arborea",
+        var veg_hidro = new ol.layer.Image({
+            title: "Vegetacion Hidrofila",
             visible: false,
             source: new ol.source.ImageWMS({
                 url: URL_OGC,
                 params: {
-                    LAYERS: 'veg_arborea'
+                    LAYERS: 'veg_hidrofila'
                 }
             })
         });
@@ -87,8 +87,8 @@
                 }),
                 red_vial,
                 //Agrego dos capas WMS mas
-                veg_culti,
-                veg_arbo
+                red_ferr,
+                veg_hidro
             ],
             view: new ol.View({
                 projection: 'EPSG:4326',
@@ -153,12 +153,12 @@
         var checkbox2 = document.getElementById('check_layer_2');
         checkbox2.addEventListener('change', function () {
             var checked = this.checked;
-            if (checked !== veg_culti.getVisible()) {
-                veg_culti.setVisible(checked);
+            if (checked !== red_ferr.getVisible()) {
+                red_ferr.setVisible(checked);
             }
         });
 
-        veg_culti.on('change:visible', function () {
+        red_ferr.on('change:visible', function () {
             var visible = this.getVisible();
             if (visible !== checkbox2.checked) {
                 checkbox2.checked = visible;
@@ -168,12 +168,12 @@
         var checkbox3 = document.getElementById('check_layer_3');
         checkbox3.addEventListener('change', function () {
             var checked = this.checked;
-            if (checked !== veg_arbo.getVisible()) {
-                veg_arbo.setVisible(checked);
+            if (checked !== veg_hidro.getVisible()) {
+                veg_hidro.setVisible(checked);
             }
         });
 
-        veg_arbo.on('change:visible', function () {
+        veg_hidro.on('change:visible', function () {
             var visible = this.getVisible();
             if (visible !== checkbox3.checked) {
                 checkbox3.checked = visible;
